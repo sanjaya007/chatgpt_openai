@@ -134,7 +134,7 @@ $(window).on("load", function () {
         if (response.bot.trim() === "") {
           typeTextEffect(
             $(`#${botUniqueID} #messageText`),
-            "Sometimes think yourself !! 😄",
+            "Sometime think yourself !! 😄",
             botUniqueID
           );
         } else {
