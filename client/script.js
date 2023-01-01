@@ -131,11 +131,19 @@ $(window).on("load", function () {
         clearInterval(loadBotInterval);
         $(`#${botUniqueID} #messageText`).text("");
 
-        typeTextEffect(
-          $(`#${botUniqueID} #messageText`),
-          response.bot.trim(),
-          botUniqueID
-        );
+        if (response.bot.trim() === "") {
+          typeTextEffect(
+            $(`#${botUniqueID} #messageText`),
+            "Sometimes think yourself !! 😄",
+            botUniqueID
+          );
+        } else {
+          typeTextEffect(
+            $(`#${botUniqueID} #messageText`),
+            response.bot.trim(),
+            botUniqueID
+          );
+        }
       } else {
         typeTextEffect(
           $(`#${botUniqueID} #messageText`),
