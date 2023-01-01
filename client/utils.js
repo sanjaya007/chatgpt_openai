@@ -1,4 +1,4 @@
-let SERVER_URL = window.location.origin;
+let SERVER_URL = "https://aiaskanything.onrender.com/";
 let LOCAL_SERVER_URL = "http://127.0.0.1:7000/";
 
 function generateUID() {

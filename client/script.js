@@ -10,7 +10,8 @@ let limitChatHeight = 57;
 $(window).on("load", function () {
   screenWidth = window.innerWidth;
 
-  const URL = LOCAL_SERVER_URL;
+  const URL = SERVER_URL;
+  // const URL = LOCAL_SERVER_URL;
   const form = document.getElementById("formBox");
 
   function botLoader(element) {
