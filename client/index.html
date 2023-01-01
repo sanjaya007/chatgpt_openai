@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI | Ask Anything</title>
+    <!-- favicon  -->
+    <link
+      rel="shortcut icon"
+      href="./assets/images/favicon.png"
+      type="image/x-icon"
+    />
+    <!-- sanjaya css  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/sanjaya007/flex-library@2.0/dist/css/sanjaya.min.css"
+      crossorigin="anonymous"
+    />
+    <!-- font awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- custom css  -->
+    <link rel="stylesheet" href="./style.css" />
+    <!-- jquery  -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="flex-css-column-sb" id="app">
+      <div class="chat-container flex-css-column-sb">
+        <div class="list-box" id="chatListBox">
+          <!-- <div class="list-wrapper user-list">
+            <div class="list flex-css-row-start gap-container">
+              <div class="profile-box">
+                <img src="./assets/images/user.png" alt="chat" />
+              </div>
+              <div class="info-box">
+                <p>What is Javacript</p>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="form-container gap-container">
+          <div class="form-wrapper">
+            <form class="form-box flex-css-row" id="formBox">
+              <textarea
+                name="prompt"
+                cols="1"
+                rows="1"
+                placeholder="Ask anything..."
+                id="inputBox"
+              ></textarea>
+              <button type="submit">
+                <img src="./assets/images/send_icon.png" alt="send" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
