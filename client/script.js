@@ -45,6 +45,8 @@ let customAnswers = [
   "My name is Sanjaya Paudel. I am here as an AI.",
   "I am Sanjaya Paudel as an AI. I am happy you are here. 😄",
   "I am Sanjaya Paudel as an AI. Ask me anything. 🔥",
+  "I am Sanjaya Paudel as an AI. I am happy you are here. 😄",
+  "I am Sanjaya Paudel as an AI. Ask me anything. 🔥",
 ];
 
 $(window).on("load", function () {
