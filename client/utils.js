@@ -8,4 +8,10 @@ function generateUID() {
   return finalUID;
 }
 
-export { SERVER_URL, LOCAL_SERVER_URL, generateUID };
+function selectRandomFromArray(arr) {
+  const arrLength = arr.length;
+  const selectedItem = arr[Math.floor(Math.random() * arrLength)];
+  return selectedItem;
+}
+
+export { SERVER_URL, LOCAL_SERVER_URL, generateUID, selectRandomFromArray };

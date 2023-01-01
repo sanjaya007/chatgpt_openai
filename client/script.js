@@ -1,11 +1,51 @@
-import { SERVER_URL, LOCAL_SERVER_URL, generateUID } from "./utils";
+import {
+  SERVER_URL,
+  LOCAL_SERVER_URL,
+  generateUID,
+  selectRandomFromArray,
+} from "./utils";
 import { postData } from "./ajax";
 import userIcon from "./assets/images/user.png";
 import botIcon from "./assets/images/bot.png";
 
 let loadBotInterval;
+let customTimeout;
 let screenWidth;
 let limitChatHeight = 57;
+
+let customQuestions = [
+  "who are you",
+  "who are you?",
+  "who are you ?",
+  "who you",
+  "who you?",
+  "who you ?",
+  "you",
+  "you?",
+  "you ?",
+  "what is your name",
+  "what is your name?",
+  "what is your name ?",
+  "what's your name",
+  "what's your name?",
+  "what's your name ?",
+  "what your name",
+  "what your name?",
+  "what your name ?",
+  "whats your name",
+  "whats your name?",
+  "whats your name ?",
+  "your name",
+  "your name?",
+  "your name ?",
+];
+
+let customAnswers = [
+  "I am Sanjaya Paudel as an AI.",
+  "My name is Sanjaya Paudel. I am here as an AI.",
+  "I am Sanjaya Paudel as an AI. I am happy you are here. 😄",
+  "I am Sanjaya Paudel as an AI. Ask me anything. 🔥",
+];
 
 $(window).on("load", function () {
   screenWidth = window.innerWidth;
@@ -42,6 +82,7 @@ $(window).on("load", function () {
       } else {
         clearInterval(interval);
         $("#inputBox").removeAttr("disabled");
+        $("#inputBox").focus();
       }
     }, 20);
   }
@@ -69,13 +110,25 @@ $(window).on("load", function () {
     prompt: "",
   };
 
+  function getCustomAnswer(botUniqueID) {
+    clearInterval(loadBotInterval);
+    clearTimeout(customTimeout);
+    $(`#${botUniqueID} #messageText`).text("");
+
+    typeTextEffect(
+      $(`#${botUniqueID} #messageText`),
+      selectRandomFromArray(customAnswers),
+      botUniqueID
+    );
+  }
+
   function getAnswers(botUniqueID) {
     postData(URL, JSON.stringify(prompt_data), function (response) {
       prompt_data.prompt = "";
       if (response) {
-        console.log(response);
         clearInterval(loadBotInterval);
         $(`#${botUniqueID} #messageText`).text("");
+
         typeTextEffect(
           $(`#${botUniqueID} #messageText`),
           response.bot.trim(),
@@ -109,7 +162,7 @@ $(window).on("load", function () {
       $(`#${userUniqueID} #listBox`).addClass("chg-flex-top");
     }
 
-    prompt_data.prompt = userText;
+    prompt_data.prompt = userText.trim();
     form.reset();
     $("#inputBox").attr("disabled", "disabled");
 
@@ -121,13 +174,39 @@ $(window).on("load", function () {
 
     botLoader($(`#${botUniqueID} #messageText`));
 
-    // get data
-    getAnswers(botUniqueID);
+    $.each(customQuestions, function (index, value) {
+      if (value.search(prompt_data.prompt.toLowerCase()) >= 0) {
+        const customLength = value.length;
+        if (prompt_data.prompt.length < customLength + 5) {
+          customTimeout = setTimeout(function () {
+            getCustomAnswer(botUniqueID);
+          }, 1000);
+          return false;
+        }
+      } else if (prompt_data.prompt.toLowerCase().search(value) >= 0) {
+        const customLength = value.length;
+        if (prompt_data.prompt.length < customLength + 5) {
+          customTimeout = setTimeout(function () {
+            getCustomAnswer(botUniqueID);
+          }, 1000);
+          return false;
+        }
+      } else {
+        // get data
+        if (index + 1 >= customQuestions.length) {
+          console.log("hello");
+          getAnswers(botUniqueID);
+        }
+      }
+    });
   }
 
   $("#formBox").on("submit", handleSubmit);
   $("#formBox").on("keyup", function (e) {
-    if (e.keyCode === 13) {
+    const keyCode = e.which || e.keyCode;
+
+    if (keyCode === 13 && !e.shiftKey) {
+      e.preventDefault();
       handleSubmit(e);
     }
   });
