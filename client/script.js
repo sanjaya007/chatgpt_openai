@@ -187,7 +187,7 @@ $(window).on("load", function () {
     $.each(customQuestions, function (index, value) {
       if (value.search(prompt_data.prompt.toLowerCase()) >= 0) {
         const customLength = value.length;
-        if (prompt_data.prompt.length < customLength + 5) {
+        if (prompt_data.prompt.length < customLength + 4) {
           customTimeout = setTimeout(function () {
             getCustomAnswer(botUniqueID);
           }, 1000);
@@ -195,7 +195,7 @@ $(window).on("load", function () {
         }
       } else if (prompt_data.prompt.toLowerCase().search(value) >= 0) {
         const customLength = value.length;
-        if (prompt_data.prompt.length < customLength + 5) {
+        if (prompt_data.prompt.length < customLength + 4) {
           customTimeout = setTimeout(function () {
             getCustomAnswer(botUniqueID);
           }, 1000);
