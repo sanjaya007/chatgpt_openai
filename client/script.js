@@ -3,6 +3,8 @@ import {
   LOCAL_SERVER_URL,
   generateUID,
   selectRandomFromArray,
+  customQuestions,
+  customAnswers,
 } from "./utils";
 import { postData } from "./ajax";
 import userIcon from "./assets/images/user.png";
@@ -12,42 +14,7 @@ let loadBotInterval;
 let customTimeout;
 let screenWidth;
 let limitChatHeight = 57;
-
-let customQuestions = [
-  "who are you",
-  "who are you?",
-  "who are you ?",
-  "who you",
-  "who you?",
-  "who you ?",
-  "you",
-  "you?",
-  "you ?",
-  "what is your name",
-  "what is your name?",
-  "what is your name ?",
-  "what's your name",
-  "what's your name?",
-  "what's your name ?",
-  "what your name",
-  "what your name?",
-  "what your name ?",
-  "whats your name",
-  "whats your name?",
-  "whats your name ?",
-  "your name",
-  "your name?",
-  "your name ?",
-];
-
-let customAnswers = [
-  "I am Sanjaya Paudel as an AI.",
-  "My name is Sanjaya Paudel. I am here as an AI.",
-  "I am Sanjaya Paudel as an AI. I am happy you are here. 😄",
-  "I am Sanjaya Paudel as an AI. Ask me anything. 🔥",
-  "I am Sanjaya Paudel as an AI. I am happy you are here. 😄",
-  "I am Sanjaya Paudel as an AI. Ask me anything. 🔥",
-];
+let previousMessage = null;
 
 $(window).on("load", function () {
   screenWidth = window.innerWidth;
@@ -173,6 +140,7 @@ $(window).on("load", function () {
     }
 
     prompt_data.prompt = userText.trim();
+    previousMessage = prompt_data.prompt;
     form.reset();
     $("#inputBox").attr("disabled", "disabled");
 
@@ -204,7 +172,6 @@ $(window).on("load", function () {
       } else {
         // get data
         if (index + 1 >= customQuestions.length) {
-          console.log("hello");
           getAnswers(botUniqueID);
         }
       }
@@ -214,6 +181,12 @@ $(window).on("load", function () {
   $("#formBox").on("submit", handleSubmit);
   $("#formBox").on("keyup", function (e) {
     const keyCode = e.which || e.keyCode;
+
+    if (keyCode === 65 && e.ctrlKey) {
+      if (previousMessage) {
+        $("#inputBox").val(previousMessage);
+      }
+    }
 
     if (keyCode === 13 && !e.shiftKey) {
       e.preventDefault();
